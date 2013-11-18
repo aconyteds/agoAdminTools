@@ -12,93 +12,74 @@
 		<br>
 		<div id="customBasemapForm" data-dojo-type="dijit/form/Form">
 			<table class="form">
-				<tr>
-					<td>
-						<p><h2>Base Layer&nbsp;</h2></p>
-					</td>
-				</tr>
-				<tr>
-					<td class='leftPad'>
-						<p><b>URL:&nbsp;</b></p>
-					</td>	
-					<td>
-						<p><input 	id="baseLayerURL" 
-									data-dojo-type="dijit/form/ValidationTextBox"
-									data-dojo-props="missingMessage:'A URL is required.'"  
-									placeHolder="http://myserver/arcgis/rest/services/myService/mapServer" 
-									required="true"></p>
-					</td>
-				</tr>
-				<tr>
-					<td class='leftPad'>
-						<p><b>Opacity:&nbsp;</b></p>
-					</td>	
-					<td>
-						<p><input 	id="baseLayerOpacity" 
-									data-dojo-type="dijit/form/NumberTextBox"
-									data-dojo-props="constraints:{min:0,max:1},invalidMessage:'Enter a value between 0.0 and 1.0'" 
-									placeHolder="1.0" 
-									required="true"></p>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<p><h2>Overlay Layer&nbsp;</h2></p>
-					</td>
-				</tr>
-				<tr>
-					<td class='leftPad'>
-						<p><b>URL:&nbsp;</b></p>
-					</td>	
-					<td>
-						<p><input 	id="overlayLayerURL" 
-									data-dojo-type="dijit/form/ValidationTextBox"
-									data-dojo-props="missingMessage:'A URL is required.'"  
-									placeHolder="http://myserver/arcgis/rest/services/myService/mapServer"
-									required="true"></p>
-					</td>
-				</tr>
-				<tr>
-					<td class='leftPad'>
-						<p><b>Opacity:&nbsp;</b></p>
-					</td>	
-					<td>
-						<p><input 	id="overlayLayerOpacity"
-									data-dojo-type="dijit/form/NumberTextBox"
-									data-dojo-props="constraints:{min:0,max:1},
-										invalidMessage:'Enter a value between 0.0 and 1.0'" 
-									placeHolder="1.0" 
-									required="true"></p>
-					</td>
-				</tr>
-				<tr>
-					<td class='leftPad'>
-						<p><b>Is Reference:&nbsp;</b></p>
-					</td>	
-					<td>
-						<p><input 	id="overlayLayerReference" 
-									data-dojo-type="dijit/form/CheckBox" 
-									checked="true"></p>
-					</td>
-				</tr>
-
-				<tr>
-					<td>
-						<p><h2>Item&nbsp;</h2></p>
-					</td>
-				</tr>
-				<tr>
-					<td class='leftPad'>
-						<p><b>Title:&nbsp;</b></p>
-					</td>	
-					<td>
-						<p><input 	id="itemTitle" 
-									data-dojo-type="dijit/form/ValidationTextBox"
-									data-dojo-props="missingMessage:'A title is required.'"  
-									placeHolder="Title for the Webmap" 
-									required="true"></p>
-					</td>
-				</tr>
+			    <thead>
+    				<tr>
+    					<td>
+    						<p><h2>Base Layer&nbsp;</h2></p>
+    					</td>
+    				</tr>
+    				<tr>
+    					<td class='leftPad'>
+    						<p><b>URL:&nbsp;</b></p>
+    					</td>	
+    					<td>
+    						<p><input 	id="baseLayerURL" 
+    									data-dojo-type="dijit/form/ValidationTextBox"
+    									data-dojo-props="missingMessage:'A URL is required.'"  
+    									placeHolder="http://myserver/arcgis/rest/services/myService/mapServer" 
+    									required="true"></p>
+    					</td>
+    				</tr>
+    				<tr>
+    					<td class='leftPad'>
+    						<p><b>Opacity:&nbsp;</b></p>
+    					</td>	
+    					<td>
+    						<p><input 	id="baseLayerOpacity" 
+    									data-dojo-type="dijit/form/NumberTextBox"
+    									data-dojo-props="constraints:{min:0,max:1},invalidMessage:'Enter a value between 0.0 and 1.0'" 
+    									placeHolder="1.0" 
+    									required="true"></p>
+    					</td>
+    				</tr>
+    				
+				</thead>
+				
+				<tbody id="newOverlayRow">
+				    <tr >
+    				    <td><div id="newOverlayButtonDiv">
+            			        <button id="newOverlayButton" data-dojo-type="dijit.form.Button" data-dojo-props="">
+                    				<script type="dojo/on" data-dojo-event="click" data-dojo-args="evt">
+                    				    require(["custom/customBasemapOverlay", "js/portal"], 
+                    				        function(customBasemapOverlay, portal){
+                    				            portal.addOverlay(new customBasemapOverlay().placeAt("newOverlayRow", "before"));
+                    				        });
+                    				</script>
+                    				Add Overlay
+                    			</button>
+            		        </div>
+                        </td>
+    			    </tr>
+				</tbody>
+                <tfoot>
+    				<tr>
+    					<td>
+    						<p><h2>Item&nbsp;</h2></p>
+    					</td>
+    				</tr>
+    				<tr>
+    					<td class='leftPad'>
+    						<p><b>Title:&nbsp;</b></p>
+    					</td>	
+    					<td>
+    						<p><input 	id="itemTitle" 
+    									data-dojo-type="dijit/form/ValidationTextBox"
+    									data-dojo-props="missingMessage:'A title is required.'"  
+    									placeHolder="Title for the Webmap" 
+    									required="true"></p>
+    					</td>
+    				</tr>
+    			</tfoot>
 				<!-- Tags functionality coming soon
 				<tr>
 					<td>
@@ -118,12 +99,13 @@
 		<div id="customBasemapButtonDiv">
 			<button id="customBasemapButton" data-dojo-type="dijit.form.Button" data-dojo-props="">
 				<script type="dojo/on" data-dojo-event="click" data-dojo-args="evt">
-			        require(["dijit/registry", "js/portal",], function (registry, portal){
+			        require(["dijit/registry", "js/portal", "dojo/_base/array"], function (registry, portal, array){
 			        	var baseFormObj, baseLayer, overlayLayer, itemData;
 
 			        	baseFormObj = {};
 			        	baseFormObj.baseLayer = {};
-			        	baseFormObj.overlayLayer = {};
+			        	//baseFormObj.overlayLayer = {};
+			        	baseFormObj.overlayLayers=[];
 			        	baseFormObj.itemData = {};
 
 			        	// baseFormObj.baseLayer.id = registry.byId("baseLayerID").get("value");
@@ -132,7 +114,15 @@
 				        baseFormObj.baseLayer.url = registry.byId("baseLayerURL").get("value");
 
 				        // baseFormObj.overlayLayer.id = registry.byId("overlayLayerID").get("value");
-				        if (registry.byId("overlayLayerReference").get("checked") === true) {
+				        array.map(portal.overlays, function(ovl){
+				            baseFormObj.overlayLayers.push({
+				                url:ovl.overlayLayerURL.get("value"),
+				                opacity:ovl.overlayLayerOpacity.get("value")||1,
+				                visibility:true,
+				                isReference:ovl.overlayLayerReference.get("checked")
+				            });
+				        });
+				        /*if (registry.byId("overlayLayerReference").get("checked") === true) {
 				            baseFormObj.overlayLayer.isReference = true;
 				        }
 				        else {
@@ -140,7 +130,7 @@
 				        }
 				        baseFormObj.overlayLayer.opacity = (registry.byId("overlayLayerOpacity").get("value"));
 				        baseFormObj.overlayLayer.visibility = true;
-				        baseFormObj.overlayLayer.url = (registry.byId("overlayLayerURL").get("value"));
+				        baseFormObj.overlayLayer.url = (registry.byId("overlayLayerURL").get("value"));*/
 
 				        baseFormObj.itemData.title = registry.byId("itemTitle").get("value");
 				        

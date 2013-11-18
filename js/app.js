@@ -25,7 +25,7 @@ define([
 		currentPortal = new esriPortal.Portal(registry.byId("portalInput").get("value"));
 
 		on(esri.id, "dialog-cancel", function(info){
-			registry.byId("portalInput").set("value", "http://www.arcgis.com");
+			registry.byId("portalInput").set("value", "https://geowherehouse.gvs.nga.mil");
 		});
 
 		currentPortal.signIn().then(function(loggedInUser){
@@ -57,7 +57,7 @@ define([
 		registry.byId("loginButton").set("label","Log Out");
 		registry.byId("loginButton").set("onClick", function(){logOut()});
 		dom.byId("orgName").innerHTML = currentPortal.name;
-		dom.byId("siteTitle").innerHTML = "AGO Admin Tools (BETA): " + currentPortal.name;
+		dom.byId("siteTitle").innerHTML = "AGO Admin Tools (CUSTOM): " + currentPortal.name;
 
 	}
 
@@ -84,7 +84,7 @@ define([
 	function makeMainTab(){
 		var mainTab = new ContentPane({
     		id: "mainTab",
-			href: "./custom/templates/mainTab.html",
+			href: "./custom/templates/customBasemapTab.html",
 			title: "Welcome",
 			closable: false,
 			selected: true,

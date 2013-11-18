@@ -14,7 +14,7 @@ define([
 
 ], function (registry, array, Deferred, dom, all, regexp, xhr, esriRequest, app) {
 
-    var vOldPath, vNewPath, pattern, urlBasedItems;
+    var vOldPath, vNewPath, pattern, urlBasedItems, overlays=[];
 
     urlBasedItems = ['Feature Service', 'Map Service', 'Image Service', 'Web Mapping Application',
         'WMS','WMTS', 'Geodata Service', 'Globe Service','Geometry Service', 'Geocoding Service',
@@ -390,12 +390,13 @@ define([
     }
 
     function createCustomBasemap (baseFormObj) {
-
+        console.log(baseFormObj);
         var baseServiceInfo, overlayServiceInfo;
-        all([
-            retrieveServiceJSON(baseFormObj.baseLayer.url),
-            retrieveServiceJSON(baseFormObj.overlayLayer.url)
-        ]).then(function (results){
+        var services=[baseFormObj.baseLayer.url];
+        array.map(baseFormObj.overlayLayers, function(ovl){
+            services.push(ovl.url);
+        });
+        all(services).then(function (results){
             compareServiceJSON(results).then(function (results){
                 if (results){
                     baseMapLayers = [];
@@ -403,7 +404,9 @@ define([
                     baseMapData = {};
 
                     baseMapLayers.push(baseFormObj.baseLayer);
-                    baseMapLayers.push(baseFormObj.overlayLayer);
+                    array.map(baseFormObj.overlayLayer, function(ovl){
+                        baseMapLayers.push(ovl);
+                    });
 
                     baseMap.baseMapLayers = baseMapLayers;
                     baseMap.title = baseFormObj.itemData.title;
@@ -566,12 +569,18 @@ define([
         registry.byId('itemTitle').reset();
         // registry.byId('itemTags').set('value', 'Tag, Tag');
     }
+    
+    function addOverlay(obj){
+        overlays.push(obj);
+    }
 
     return {
         getUserInfos: getUserInfos,
         updateShortUrl: updateShortUrl,
         updateAllItemURLs: updateAllItemURLs,
         createCustomBasemap: createCustomBasemap,
+        addOverlay:addOverlay,
+        overlays:overlays
     };  
 });
         

@@ -169,7 +169,7 @@ require([
             id: "portalInput",
             title: " Portal URL: ",
             class: "text",
-            value: "http://www.arcgis.com"
+            value: "https://geowherehouse.gvs.nga.mil"
         })
         portalInput.placeAt("menuDiv");
 
