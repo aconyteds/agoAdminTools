@@ -1,0 +1,42 @@
+<tbody>
+    <tr>
+    	<td>
+    		<p><h2>Overlay Layer&nbsp;</h2></p>
+    	</td>
+    </tr>
+    <tr>
+    	<td class='leftPad'>
+    		<p><b>URL:&nbsp;</b></p>
+    	</td>	
+    	<td>
+    		<p><input 	data-dojo-attach-point="overlayLayerURL" 
+    					data-dojo-type="dijit/form/ValidationTextBox"
+    					data-dojo-props="missingMessage:'A URL is required.'"  
+    					placeHolder="http://myserver/arcgis/rest/services/myService/mapServer"
+    					required="true"></p>
+    	</td>
+    </tr>
+    <tr>
+    	<td class='leftPad'>
+    		<p><b>Opacity:&nbsp;</b></p>
+    	</td>	
+    	<td>
+    		<p><input 	data-dojo-attach-point="overlayLayerOpacity"
+    					data-dojo-type="dijit/form/NumberTextBox"
+    					data-dojo-props="constraints:{min:0,max:1},
+    						invalidMessage:'Enter a value between 0.0 and 1.0'" 
+    					placeHolder="1.0" 
+    					required="true"></p>
+    	</td>
+    </tr>
+    <tr>
+    	<td class='leftPad'>
+    		<p><b>Is Reference:&nbsp;</b></p>
+    	</td>	
+    	<td>
+    		<p><input 	data-dojo-attach-point="overlayLayerReference" 
+    					data-dojo-type="dijit/form/CheckBox" 
+    					checked="true"></p>
+    	</td>
+    </tr>
+</tbody>
