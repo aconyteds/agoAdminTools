@@ -84,7 +84,7 @@ define([
 	function makeMainTab(){
 		var mainTab = new ContentPane({
     		id: "mainTab",
-			href: "./custom/templates/customBasemapTab.html",
+			href: "./custom/templates/mainTab.html",
 			title: "Welcome",
 			closable: false,
 			selected: true,
