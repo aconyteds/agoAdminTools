@@ -25,11 +25,11 @@ define([
 		currentPortal = new esriPortal.Portal(registry.byId("portalInput").get("value"));
 
 		on(esri.id, "dialog-cancel", function(info){
-			registry.byId("portalInput").set("value", "https://geowherehouse.gvs.nga.mil");
+			registry.byId("portalInput").set("value", window.location.origin);
 		});
 
 		currentPortal.signIn().then(function(loggedInUser){
-			console.log(loggedInUser);
+			//console.log(loggedInUser);
 			if (loggedInUser.role != 'org_admin') {
 				alert("You must be an administrator in your org to use this tool.");
 				portal.signOut();
@@ -57,7 +57,7 @@ define([
 		registry.byId("loginButton").set("label","Log Out");
 		registry.byId("loginButton").set("onClick", function(){logOut()});
 		dom.byId("orgName").innerHTML = currentPortal.name;
-		dom.byId("siteTitle").innerHTML = "AGO Admin Tools (CUSTOM): " + currentPortal.name;
+		dom.byId("siteTitle").innerHTML = "GWH Admin Tools (Admin Only): " + currentPortal.name;
 
 	}
 
@@ -84,6 +84,7 @@ define([
 	function makeMainTab(){
 		var mainTab = new ContentPane({
     		id: "mainTab",
+    		/*href:"./custom/templates/customBasemapTab.html",*/
 			href: "./custom/templates/mainTab.html",
 			title: "Welcome",
 			closable: false,

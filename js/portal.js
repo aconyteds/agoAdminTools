@@ -390,11 +390,10 @@ define([
     }
 
     function createCustomBasemap (baseFormObj) {
-        console.log(baseFormObj);
         var baseServiceInfo, overlayServiceInfo;
-        var services=[baseFormObj.baseLayer.url];
+        var services=[retrieveServiceJSON(baseFormObj.baseLayer.url)];
         array.map(baseFormObj.overlayLayers, function(ovl){
-            services.push(ovl.url);
+            services.push(retrieveServiceJSON(ovl.url));
         });
         all(services).then(function (results){
             compareServiceJSON(results).then(function (results){
@@ -404,7 +403,7 @@ define([
                     baseMapData = {};
 
                     baseMapLayers.push(baseFormObj.baseLayer);
-                    array.map(baseFormObj.overlayLayer, function(ovl){
+                    array.map(baseFormObj.overlayLayers, function(ovl){
                         baseMapLayers.push(ovl);
                     });
 
@@ -417,6 +416,7 @@ define([
                     baseMapData.version = "1.9";
 
                     var stringified = JSON.stringify(baseMapData);
+                    console.log(stringified);
 
                     var extent = JSON.stringify([[-180, 90],[180, -90]]);
 
@@ -573,6 +573,10 @@ define([
     function addOverlay(obj){
         overlays.push(obj);
     }
+    
+    function removeOverlay(obj){
+        overlays.splice(array.indexOf(overlays, obj), 1);
+    }
 
     return {
         getUserInfos: getUserInfos,
@@ -580,6 +584,7 @@ define([
         updateAllItemURLs: updateAllItemURLs,
         createCustomBasemap: createCustomBasemap,
         addOverlay:addOverlay,
+        removeOverlay:removeOverlay,
         overlays:overlays
     };  
 });

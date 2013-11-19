@@ -109,7 +109,7 @@ require([
 		tabPane.set("content",tabContainer);
 
         // Build the Menu DIV and Insert into the ContentPane
-        domConstruct.place("<div id='foo' style='background-color:white'  class='title margin10'>AGO Admin Tools (CUSTOM): <span id='orgName' style='color: #4d4d4d;'></span></div><div id='menuDiv' class='margin10l margin 10b' style='background-color:white'></div>","titlePane","last");
+        domConstruct.place("<div id='foo' style='background-color:white'  class='title margin10'>GWH Admin Tools (Admin Only): <span id='orgName' style='color: #4d4d4d;'></span></div><div id='menuDiv' class='margin10l margin 10b' style='background-color:white'></div>","titlePane","last");
         
         // Build the Combo Button and insert into the Menu DIV
         var taskMenu = new Menu ({
@@ -134,7 +134,7 @@ require([
 
         var customBasemapItem = new MenuItem({
             id: "customBaesmapItem",
-            label: "Create Custom Basemap - NEW!",
+            label: "Create Custom Basemap",
             onClick: function(){app.makeTab("customBasemapTab","Create a Custom Basemap","./custom/templates/customBasemapTab.html")},
         });
         taskMenu.addChild(customBasemapItem);
@@ -169,7 +169,7 @@ require([
             id: "portalInput",
             title: " Portal URL: ",
             class: "text",
-            value: "https://geowherehouse.gvs.nga.mil"
+            value: window.location.origin
         })
         portalInput.placeAt("menuDiv");
 

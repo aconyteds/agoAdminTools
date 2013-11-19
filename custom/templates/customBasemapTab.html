@@ -3,11 +3,12 @@
 		
 		<div id="customBasemapDescription" style="width:60%">
 			<h1 class="blue">Description</h1>
-			<p>This task will create a multi-layer basemap. The Base Layer will appear on the bottom and the Overlay Layer will appear on top.  If <i>is Reference</i> is checked, operational layers will
+			<p>This task will create a multi-layer basemap. The Base Layer will appear on the bottom and the Overlay Layer(s) will appear on top (in the order specified).  If <i>is Reference</i> is checked, operational layers will
 				appear in between the Base Layer and the Overlay Layer.</p>
 			<p>The item will appear in the logged-in user's root folder. From the item details page, the user should provide further details about the item including
 				a description, access and use constraints, a thumbnail, and a custom extent.</p> 
-			<p> * code inspired by a python script posted to <a href='https://github.com/tswanson/AGO_AddItem_Basemap' target='_blank'>GitHub</a> by Tom Swanson.</p>
+			<p> * code originally inspired by a python script posted to <a href='https://github.com/tswanson/AGO_AddItem_Basemap' target='_blank'>GitHub</a> by Tom Swanson.</p>
+			<p>Modified by Ian Wilson 11.19.13.</p>
 		</div>
 		<br>
 		<div id="customBasemapForm" data-dojo-type="dijit/form/Form">
@@ -44,15 +45,17 @@
     				</tr>
     				
 				</thead>
+				<tbody data-dojo-type="custom/customBasemapOverlay">
+				</tbody>
 				
 				<tbody id="newOverlayRow">
 				    <tr >
     				    <td><div id="newOverlayButtonDiv">
             			        <button id="newOverlayButton" data-dojo-type="dijit.form.Button" data-dojo-props="">
                     				<script type="dojo/on" data-dojo-event="click" data-dojo-args="evt">
-                    				    require(["custom/customBasemapOverlay", "js/portal"], 
-                    				        function(customBasemapOverlay, portal){
-                    				            portal.addOverlay(new customBasemapOverlay().placeAt("newOverlayRow", "before"));
+                    				    require(["custom/customBasemapOverlay"], 
+                    				        function(customBasemapOverlay){
+                    				            new customBasemapOverlay({closeable:true}).placeAt("newOverlayRow", "before");
                     				        });
                     				</script>
                     				Add Overlay
