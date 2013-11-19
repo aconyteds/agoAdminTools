@@ -560,11 +560,13 @@ define([
         registry.byId('baseLayerURL').reset();
         registry.byId('baseLayerOpacity').set('value', '');
         registry.byId('baseLayerOpacity').reset();
-        registry.byId('overlayLayerURL').set('value', '');
-        registry.byId('overlayLayerURL').reset();
-        registry.byId('overlayLayerOpacity').set('value', '');
-        registry.byId('overlayLayerOpacity').reset();
-        registry.byId('overlayLayerReference').set('value', true);
+        array.map(overlays, function(ovl){
+            ovl.overlayLayerURL.set("value", "");
+            ovl.overlayLayerURL.reset();
+            ovl.overlayLayerOpacity.set("value", "");
+            ovl.overlayLayerOpacity.reset();
+            ovl.overlayLayerReference.set("value", true);
+        });
         registry.byId('itemTitle').set('value', '');
         registry.byId('itemTitle').reset();
         // registry.byId('itemTags').set('value', 'Tag, Tag');
